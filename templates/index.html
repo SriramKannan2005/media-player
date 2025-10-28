@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineHome+ | Your Personal Cinema</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Main Header (Fixed) -->
+    <header class="header">
+        <div class="header-left">
+            <button id="toggleSidebar" class="toggle-sidebar-btn">☰</button>
+            <h1 class="logo">CineHome<span class="logo-plus">+</span></h1>
+        </div>
+        <div class="header-center">
+            <input type="text" id="searchBar" class="search-bar" placeholder="Search videos...">
+        </div>
+        <div class="header-right">
+            <div class="gesture-toggle">
+                <span class="toggle-label">Gestures</span>
+                <label class="switch">
+                    <input type="checkbox" id="gestureToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Navigation (Collapsible) -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="nav-menu">
+                <button class="nav-item active" data-category="all">
+                    <span class="nav-icon">🎬</span>
+                    <span class="nav-text">All Videos</span>
+                </button>
+                <button class="nav-item" data-category="favorites">
+                    <span class="nav-icon">❤️</span>
+                    <span class="nav-text">Favorites</span>
+                </button>
+                <button class="nav-item" data-category="recent">
+                    <span class="nav-icon">🕒</span>
+                    <span class="nav-text">Recently Watched</span>
+                </button>
+                <button class="nav-item" data-category="continue">
+                    <span class="nav-icon">▶️</span>
+                    <span class="nav-text">Continue Watching</span>
+                </button>
+                <button class="nav-item" data-category="watchlist">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Watchlist</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area (Scrollable) -->
+        <main class="content" id="mainContent">
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state">
+                <div class="empty-icon">🎥</div>
+                <h2>Welcome to CineHome+</h2>
+                <p>Your personal video collection</p>
+            </div>
+
+            <!-- Category Title -->
+            <div id="categoryHeader" class="category-header" style="display: none;">
+                <h2 id="categoryTitle">All Videos</h2>
+                <span id="videoCount" class="video-count">0 videos</span>
+            </div>
+
+            <!-- Video Grid -->
+            <div id="videoGrid" class="video-grid"></div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <p>No videos found matching your search</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" class="close-btn">✕</button>
+            <div class="video-container">
+                <video id="videoPlayer" controls></video>
+                
+                <!-- Camera Mini Window (inside player) -->
+                <div id="cameraMiniWindow" class="camera-mini-window">
+                    <div class="camera-mini-header">
+                        <span>📷 Gesture Camera</span>
+                        <button id="closeCameraMini" class="close-camera-mini">✕</button>
+                    </div>
+                    <video id="cameraFeed" class="camera-feed" autoplay playsinline></video>
+                    <canvas id="cameraCanvas" class="camera-canvas"></canvas>
+                    <div class="camera-mini-status">
+                        <span class="status-dot"></span>
+                        <span id="gestureDetected">No gesture</span>
+                    </div>
+                </div>
+                
+                <!-- Previous/Next Navigation -->
+                <button id="prevVideoBtn" class="nav-video-btn prev-btn" title="Previous Video">
+                    <span>◀</span>
+                </button>
+                <button id="nextVideoBtn" class="nav-video-btn next-btn" title="Next Video">
+                    <span>▶</span>
+                </button>
+                
+                <div class="video-info">
+                    <h3 id="videoTitle"></h3>
+                    <div class="video-controls">
+                        <button id="favoriteBtn" class="control-btn">
+                            <span id="favoriteIcon">🤍</span> Favorite
+                        </button>
+                        <button id="cameraBtn" class="control-btn">
+                            <span>📷</span> Camera
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Chatbot Button -->
+    <button id="chatFloatingBtn" class="chat-floating-btn" title="Movie Assistant">
+        <span class="chat-icon">💬</span>
+    </button>
+
+    <!-- Chatbot Panel (Slide from bottom) -->
+    <div id="chatPanel" class="chat-panel">
+        <div class="chat-header">
+            <h3>🎬 Movie Assistant</h3>
+            <button id="closeChatBtn" class="close-chat-btn">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message bot">
+                <div class="message-content">
+                    👋 Hi! I'm your movie assistant powered by Gemini AI. Ask me anything about movies, get recommendations, or learn about the film you're watching!
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Ask about movies...">
+            <button id="sendChatBtn" class="send-chat-btn">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
