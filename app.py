@@ -38,7 +38,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 5000 * 1024 * 1024  # 5GB max
 
 # Gemini API Configuration
-GEMINI_API_KEY = "AIzaSyC4oUnPnzsMGfJyFH3ERB-K4beYQup5pbg"
+GEMINI_API_KEY = "YOUR_API_KEY"
 genai.configure(api_key=GEMINI_API_KEY)
 gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 
